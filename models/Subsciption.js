@@ -5,6 +5,13 @@ const SubscriptionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+
+  platform: {
+    type: String,
+    required: true
+},
+
+
   name: {
     type: String,
     required: true
@@ -23,4 +30,8 @@ const SubscriptionSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Subscription', SubscriptionSchema);
+
+const Subscription = mongoose.model('Subscription', SubscriptionSchema);
+
+module.exports = Subscription;
+//module.exports = mongoose.model('Subscription', SubscriptionSchema);

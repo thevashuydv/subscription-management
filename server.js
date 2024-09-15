@@ -1,23 +1,27 @@
-require('dotenv').config();
 const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./Dbconnection/db');
 
-const connectDB = require('./config/db');
-const cors = require('cors');
-const app = express();
+// Load environment variables
+dotenv.config();
 
-// Connect to database
-
-
+// Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(express.json({ extended: false }));
-app.use(cors());
+const app = express();
 
-// Define routes
-app.use('/api/users', require('./routes/auth'));
-app.use('/api/subscriptions', require('./routes/subscriptions'));
+// Middleware to parse JSON
+app.use(express.json());
 
+// Define routes (for example, a basic route)
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
+// Get the port from the environment variables or use 5000 by default
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
