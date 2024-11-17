@@ -55,7 +55,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 space-x-6"> 
           <div className={`flex-shrink-0 ${isMobile ? 'mx-auto' : ''}`}>
-            <img className="h-14 w-auto" src="/images/SmartSubs.png" alt="Logo" /> 
+            <img className="h-14 w-auto" src="/images/ba28c46c-7d9d-41d9-babe-6ad8edf0862b.jpg" alt="Logo" /> 
           </div>
 
           {!isMobile && (
@@ -87,7 +87,7 @@ const Header = () => {
               <>
                 <Link to="/login">
                   <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition duration-300">
-                    Login
+                    Signin
                   </button>
                 </Link>
                 <Link to="/signup">
@@ -128,9 +128,9 @@ const Header = () => {
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200">
             <div className="flex flex-col items-center px-5 space-y-4">
-              <Link to="/login">
+              <Link to="/signin">
                 <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition duration-300 w-full">
-                  Login
+                  Signin
                 </button>
               </Link>
               <Link to="/signup">

@@ -36,12 +36,16 @@ dataset['OTT Label'] = label_encoders['OTT Label'].fit_transform(dataset['OTT La
 # Step 4: Select Features and Target
 # We'll use 'Amount', 'Category', 'Merchant Description', 'Recurring', and 'Mode' as features
 # Target is 'OTT Label', which indicates the OTT platform (or None if it's not an OTT transaction)
-X = dataset[['Amount', 'Category', 'Merchant Description', 'Recurring', 'Mode']]
+X = dataset[['Amount', 'Category', 'Merchant Description', 'Recurring', 'Mode', 'User ID']]
 
 # Convert 'Mode' to numerical values (Card, UPI, Cash)
 X['Mode'] = LabelEncoder().fit_transform(X['Mode'])
 
 y = dataset['OTT Label']
+
+# You might want to add user-specific features
+user_features = pd.get_dummies(dataset['Username'], prefix='user')
+X = pd.concat([X, user_features], axis=1)
 
 # Step 5: Split the Data into Training and Testing Sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
