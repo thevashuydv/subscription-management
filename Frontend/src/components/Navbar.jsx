@@ -9,15 +9,15 @@ const Navbar = () => {
                 <div className="flex justify-between items-center h-16">
                     {/* Left side - Logo with OTT SAMADHAN */}
                     <div className="flex items-center">
+                            <h2 className="ml-2 text-xl font-bold text-black">
+                                OTT SAMADHAN
+                            </h2>
                         <Link to="/" className="flex items-center">
                             <img 
                                 src={logo} 
                                 alt="Logo" 
                                 className="h-10 w-auto"
                             />
-                            <span className="ml-2 text-xl font-bold text-black">
-                                OTT SAMADHAN
-                            </span>
                         </Link>
                     </div>
 

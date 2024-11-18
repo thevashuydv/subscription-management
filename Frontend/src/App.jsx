@@ -15,31 +15,31 @@ import Features from './pages/Features';
 import Pricing from './pages/Pricing';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
- 
   return (
-    <>
+    <AuthProvider>
       <Router>
-      <Header />
-      <div className="main-content">
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-      {/* <Footer /> */}
-    </Router>
-    </>
+        <Header />
+        <div className="main-content">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+        {/* <Footer /> */}
+      </Router>
+    </AuthProvider>
   )
 }
 

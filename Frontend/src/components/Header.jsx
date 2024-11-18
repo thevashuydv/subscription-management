@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';  
-import { FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa'; // Import icons
+import { Link, useNavigate } from 'react-router-dom';  
+import { FaBars, FaTimes, FaMoon, FaSun, FaUser } from 'react-icons/fa'; // Import icons
+import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false); // State for theme mode
   const navRef = useRef(null);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const profileMenuRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,6 +32,16 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Toggle between light and dark mode
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -38,6 +53,12 @@ const Header = () => {
   };
 
   const toggleNav = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    logout();
+    setShowProfileMenu(false);
+    navigate('/login');
+  };
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -54,8 +75,10 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 space-x-6"> 
-          <div className={`flex-shrink-0 ${isMobile ? 'mx-auto' : ''}`}>
+          <div className={`flex items-center gap-4 flex-shrink-0 ${isMobile ? 'mx-auto' : ''}`}>
             <img className="h-14 w-auto" src="/images/ba28c46c-7d9d-41d9-babe-6ad8edf0862b.jpg" alt="Logo" /> 
+            
+            <h1 className={` text-${isDarkMode ? 'white' : 'black'} text font-bold text-2xl  `} >OTT SAMADHAN</h1>
           </div>
 
           {!isMobile && (
@@ -85,16 +108,44 @@ const Header = () => {
 
             {!isMobile && (
               <>
-                <Link to="/login">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition duration-300">
-                    Signin
-                  </button>
-                </Link>
-                <Link to="/signup">
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition duration-300">
-                    Signup
-                  </button>
-                </Link>
+                {user ? (
+                  <div className="relative" ref={profileMenuRef}>
+                    <button
+                      onClick={() => setShowProfileMenu(!showProfileMenu)}
+                      className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+                    >
+                      <img
+                        src={user.avatar}
+                        alt="Profile"
+                        className="h-8 w-8 rounded-full"
+                      />
+                    </button>
+                    
+                    {showProfileMenu && (
+                      <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
+                        <button
+                          onClick={handleLogout}
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <>
+                    <Link to="/login">
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition duration-300">
+                        Signin
+                      </button>
+                    </Link>
+                    <Link to="/signup">
+                      <button className="bg-green-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-600 transition duration-300">
+                        Signup
+                      </button>
+                    </Link>
+                  </>
+                )}
               </>
             )}
 

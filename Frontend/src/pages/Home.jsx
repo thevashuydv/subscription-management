@@ -4,14 +4,9 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="home bg-gray-50 min-h-screen flex flex-col items-center justify-center text-center py-10 px-4">
-      
-      {/* Hero Section */}
-      <section className="relative w-full flex flex-col items-center justify-center bg-blue-400 text-white py-16 px-4 md:px-8">
-        <img
-          src="" // Add your background image URL here
-          alt=""
-          className="absolute inset-0 object-cover w-full h-full opacity-30"
-        />
+
+      <section className="relative w-full flex flex-col items-center justify-center bg-gray-800 text-white py-16 px-4 md:px-8">
+        
         <div className="relative z-10">
           <h1 className="text-4xl font-bold mb-4">Welcome to Subscription Manager</h1>
           <p className="text-lg mb-6">
@@ -25,7 +20,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className="w-full max-w-5xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Features</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -71,8 +66,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="w-full bg-blue-200 py-16 px-4">
+      
+      <section className="w-full bg-gray-800 py-16 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-lg mb-6">
